@@ -142,5 +142,17 @@ namespace ServiceApp.Windows
             if (services == null) return;
             Counter.Text = $"{allElemList} из {maxSizeList}";
         }
+
+        private void SerachingText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filtration();
+            services = new ObservableCollection<Service>(services.Where(t => t.Title.ToLower().Contains(SerachingText.Text)).ToList());
+            if(SerachingText.Text == "")
+            {
+                services = new ObservableCollection<Service>(context.Services.Select(t => t).ToList());
+            }
+            ServicesList.ItemsSource = services;
+            Sort();
+        }
     }
 }

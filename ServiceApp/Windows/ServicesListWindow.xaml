@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ServiceApp.Windows"
         mc:Ignorable="d"
         Title="ServicesListWindow" Height="450" Width="800"
+        MinWidth="800" MinHeight="450"
         xmlns:convert="clr-namespace:ServiceApp.Converters">
     <Window.Resources>
         <convert:Sales x:Key="Sales"/>
@@ -26,6 +27,10 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="10">
+            <TextBox Name="SerachingText"
+                     Width="250"
+                     Margin="10,0,50,0"
+                     TextChanged="SerachingText_TextChanged"/>
             <ComboBox Width="200"
                       Height="30"
                       Name="FiltrCombo"
