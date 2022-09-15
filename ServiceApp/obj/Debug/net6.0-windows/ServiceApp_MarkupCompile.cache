@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\WSR\DS\ServiceApp\ServiceApp\obj\Debug\net6.0-windows\
+D:\DS_Pojects\Services\ServiceApp\obj\Debug\net6.0-windows\
 ServiceApp
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\WSR\DS\ServiceApp\ServiceApp\App.xaml
-11407045341
+D:\DS_Pojects\Services\ServiceApp\App.xaml
+4182985048
 
-15-1905175810
-216-32524520
-MainWindow.xaml;
+21-16327770
+216-476450831
+MainWindow.xaml;Windows\CodeWindow.xaml;Windows\EditService.xaml;Windows\ServicesListWindow.xaml;
 
 False
 

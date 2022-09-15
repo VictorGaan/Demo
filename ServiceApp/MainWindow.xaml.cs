@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceApp.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,26 @@ namespace ServiceApp
 
         private void Sigin_Click(object sender, RoutedEventArgs e)
         {
+            CodeWindow codeWindow = new CodeWindow();
+            if (Admin.IsChecked == true)
+            {
+                if (codeWindow.ShowDialog() == true)
+                {
+                    ServicesListWindow window = new ServicesListWindow(true);
+                }
+               
+            }
+            else
+            {
+                ServicesListWindow window = new ServicesListWindow(false);
 
+                window.Show();
+                Close();
+                
+            }
+           
+
+            
         }
     }
 }

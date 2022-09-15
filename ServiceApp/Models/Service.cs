@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceApp.Models
 {
@@ -9,6 +10,7 @@ namespace ServiceApp.Models
         {
             ClientServices = new HashSet<ClientService>();
             ServicePhotos = new HashSet<ServicePhoto>();
+            
         }
 
         public int Id { get; set; }
@@ -18,7 +20,10 @@ namespace ServiceApp.Models
         public string? Description { get; set; }
         public double? Discount { get; set; }
         public string? MainImagePath { get; set; }
-
+        [NotMapped]
+        public string? FullName { get; set; } 
+        [NotMapped]
+        public decimal? CostWithDisount { get; set; }
         public virtual ICollection<ClientService> ClientServices { get; set; }
         public virtual ICollection<ServicePhoto> ServicePhotos { get; set; }
     }

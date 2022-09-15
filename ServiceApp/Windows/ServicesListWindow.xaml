@@ -5,13 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceApp.Windows"
         mc:Ignorable="d"
-        Title="ServicesListWindow" Height="450" Width="800">
+        Title="ServicesListWindow" Height="450" Width="800"
+        xmlns:convert="clr-namespace:ServiceApp.Converters">
+    <Window.Resources>
+        <convert:Sales x:Key="Sales"/>
+        <convert:FullPathConverter x:Key="FullPath"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10">
+            <ComboBox Width="200"
+                      Height="30"
+                      Name="FiltrCombo"
+                      Margin="10,0,10,0"
+                      SelectionChanged="FiltrCombo_SelectionChanged">
+                <ComboBoxItem IsSelected="True"
+                              Content="Выберите фильрацию"/>
+                <ComboBoxItem Content="Веь список"
+                              Name="Filtr0"/>
+                <ComboBoxItem Content="0-5"
+                              Name="Filtr5"/>
+                <ComboBoxItem Content="5-15"
+                              Name="Filtr15"/>
+                <ComboBoxItem Content="15-30"
+                              Name="Filtr30"/>
+                <ComboBoxItem Content="30-70"
+                              Name="Filtr70"/>
+                <ComboBoxItem Content="70-100"
+                              Name="Filtr100"/>
+            </ComboBox>
+            <ComboBox Width="200"
+                      Height="30"
+                      Name="SortCombo"
+                      SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Visibility="Collapsed" IsSelected="True"
+                              Content="Выберите сортировку"/>
+                <ComboBoxItem Name="DescCost"
+                              Content="По убыванию цены"/>
+                <ComboBoxItem Name="AsdCost"
+                              Content="По возрастанию цены"/>
+            </ComboBox>
+        </StackPanel>
         <ListBox Name="ServicesList"
                  Grid.Row="1"
                  Margin="10">
@@ -19,22 +65,48 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal"
                                 Margin="10">
-                        <Image/>
-                        <StackPanel >
-                            <TextBlock Tag="ServicesName"/>
-                            <TextBlock Tag="Cost"/>
-                            <TextBlock Tag="Time"/> 
-                            <TextBlock Tag="Sale"/>
-                            <StackPanel>
-                                <Button Content="радактировать"
+                        <Image Source="{Binding Path=MainImagePath}"/>
+                            <StackPanel >
+                                <TextBlock Tag="ServicesName"
+                                           Text="{Binding Path=Title}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Tag="{Binding Path=Id}"
+                                               Text="{Binding Path=Cost}"/>
+                                    <TextBlock Tag="discountCost"
+                                               Text="{Binding Path=Id, Converter={StaticResource Sales}}"/>
+                                    <TextBlock Tag="Time"
+                                               Text="{Binding StringFormat= рублей за {0} минут, Path=DurationInSeconds}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="радактировать"
+                                        Name="Edit"
+                                            Visibility="{Binding }"
+                                            Click="Edit_Click"
                                         Tag="{Binding Path=Id}"/>
-                                <Button Content="удалить"
+                                    <Button Content="удалить"
+                                        Visibility="{Binding }"
+                                            Name="Delete"
+                                            Click="Delete_Click"
                                         Tag="{Binding Path=Id}"/>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <TextBlock Height="30"
+                       Name="Counter"/>
+            <Button Grid.Row="2"
+                HorizontalAlignment="Right"
+                Margin="10"
+                Width="100"
+                Height="30"
+                Content="Добавить услугу"
+                Name="AddService"
+                Click="AddService_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
